@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <br/>
+
+                <div class="well">
+                    <h1 class="text-center">Tabela de Peças </h1>
+                <a href="{{ form_path }}" class="btn btn-success">Nova Peça</a>
+                    <table>
+                        <thread>
+                            <tr>
+                                <th></th>
+                                <th>id</th>
+                                <th>Titulo</th>
+                                <th>Preço</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thread>
+                        {% for pecas in peca_lista %}
+                            <tr>
+                                <td><a href="{{ pecas.edit_path }}" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a></td>
+                                <td>{{ pecas.id }}</td>
+                                <td>{{ pecas.title }}</td>
+                                <td>{{ pecas.price }}</td>
+                                <td>{{ pecas.amount }}</td>
+                                <td>
+                                    <form action="{{ pecas.delete_path }}" method="post">
+                                        {{ csrf_input() }}
+                                        <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

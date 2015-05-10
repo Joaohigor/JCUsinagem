@@ -16,7 +16,7 @@ APP_URL = 'https://tekton-fullstack.appspot.com'
 SENDER_EMAIL = 'joaohigor_fortunato@hotmail.com'
 DEFAULT_LOCALE = 'en_US'
 DEFAULT_TIMEZONE = 'US/Eastern'
-LOCALES = ['en_US', 'pt_BR']
+LOCALES = ['pt_BR', 'pt_BR']
 TEMPLATE_404_ERROR = 'base/404.html'
 TEMPLATE_400_ERROR = 'base/400.html'
 
