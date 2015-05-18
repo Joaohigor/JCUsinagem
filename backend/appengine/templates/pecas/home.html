@@ -1,19 +1,49 @@
-
 {% extends 'base/base.html' %}
+{% block js %}
+    <script type="text/javascript" src="/static/angular/js/angular.min.js"></script>
+    <script type="text/javascript" src="/static/peca/js/peca.js"></script>
+{#    <script type="text/javascript" src="/static/peca/js/pecas_api_mock.js">#}
+    <script type="text/javascript">
+
+        var rest=angular.module('rest',[]);
+        rest.factory('PecasApi',function($http){
+           return{
+               salvar: function(pecas){
+                   return $http.post('{{ rest_new_path }}',pecas);
+               }
+           };
+        });
+
+
+
+        var pecaApp=angular.module('pecaApp',['pecaModulo']);
+        function PecaController($scope){
+            $scope.pecas={title:'Teste',price:'1,00',amount:'20'};
+            $scope.mostrarFormFlag=false;
+
+            $scope.mostrarOuEsconderForm=function(){
+                $scope.mostrarFormFlag=!$scope.mostrarFormFlag;
+            }
+        }
+    </script>
+{% endblock %}
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <br/>
 
-                <div class="well">
+                <div class="well" ng-app="pecaApp" ng-controller="PecaController">
                     <h1 class="text-center">Tabela de Peças </h1>
-                <a href="{{ form_path }}" class="btn btn-success">Nova Peça</a>
-                    <table>
+
+                <button class="btn btn-success" ng-click="mostrarOuEsconderForm()"> Nova Peça </button>
+                <br/>
+                <br/>
+                <pecaform ng-show="mostrarFormFlag" pecas="pecas" title-label="Titulo" price-label="Preço" amount-label="Quantidade"></pecaform>
+                    <table class="table">
                         <thread>
                             <tr>
-                                <th></th>
-                                <th>id</th>
+                                <th></th><th>id</th>
                                 <th>Titulo</th>
                                 <th>Preço</th>
                                 <th>Quantidade</th>

@@ -1,0 +1,24 @@
+<div class="well">
+    <h1 class="text-center">Formulário de Peças</h1>
+    <div class="form-group" ng-class="{'has-error':errors.title}">
+        <label for="titleInput" class="control-label">{{ titleLabel }}</label>
+        <input id="titleInput" type="text" class="form-control" ng-model="pecas.title">
+        <span class="help-block" ng-show="errors.title">{{ errors.title }}</span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error':errors.price}">
+        <label for="priceInput" class="control-label">{{ priceLabel }}</label>
+        <input id="priceInput" type="text" class="form-control" ng-model="pecas.price">
+        <span class="help-block" ng-show="errors.price">{{ errors.price }}</span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error':errors.amount}">
+        <label for="amountInput" class="control-label">{{ amountLabel }}</label>
+        <input id="amountInput" type="text" class="form-control" ng-model="pecas.amount">
+        <span class="help-block" ng-show="errors.amount">{{ errors.amount }}</span>
+    </div>
+
+
+    <button type="submit" class="btn btn-success" ng_click="salvar()" ng-hide="salvandoFlag">Salvar</button>
+        <img src="/static/img/ajax.gif" ng-show="salvandoFlag"/>
+</div>

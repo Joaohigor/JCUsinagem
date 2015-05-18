@@ -108,6 +108,33 @@
 							<input class="form-control" type="text" />
 						</div> <button type="submit" class="btn btn-default"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Pesquisar</button>
 					</form>
+                     <div class="nav navbar-nav pull-right">
+                {% if _logged_user %}
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown">
+                            {{ _logged_user.name }}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/account">{% trans %}Account{% endtrans %}</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                <form action="{{ _logout_path }}" method="post" class="text-center">
+                                    <button class="btn btn-danger" type="submit">{% trans %}
+                                        Logout{% endtrans %}</button>
+                                    {{ csrf_input() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a class="btn btn-success" href="{{ _login_path }}">{% trans %}Login{% endtrans %}</a>
+
+                {% endif %}
+
+            </div>
+
 				</div>
 
 			</nav>
