@@ -13,6 +13,7 @@ from tekton.gae.middleware.redirect import RedirectResponse
 from gaegraph.model import Arc
 from gaepermission.decorator import login_required
 from gaepermission.decorator import login_not_required
+from routes.rests import rest
 
 @no_csrf
 def index(_logged_user):
@@ -31,7 +32,8 @@ def index(_logged_user):
         pecas['edit_path']='%s/%s'%(editar_form_path,pecas['id'])
         pecas['delete_path']='%s/%s'%(delete_path,pecas['id'])
     contexto={'peca_lista': peca_lista,
-              'form_path':router.to_path(form)}
+              'form_path':router.to_path(form),
+              'rest_new_path':router.to_path(rest.new)}
     return TemplateResponse(contexto)
 
 @login_required

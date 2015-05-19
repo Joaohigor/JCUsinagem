@@ -10,17 +10,25 @@
            return{
                salvar: function(pecas){
                    return $http.post('{{ rest_new_path }}',pecas);
+               },
+               listar: function(){
+                   return $http.post('{{ rest_list_path }}');
                }
            };
         });
 
 
 
-        var pecaApp=angular.module('pecaApp',['pecaModulo']);
-        function PecaController($scope){
+        var pecaApp=angular.module('pecaApp',['pecaModulo'],'rest');
+        function PecaController($scope,PecaApi){
             $scope.pecas={title:'Teste',price:'1,00',amount:'20'};
             $scope.mostrarFormFlag=false;
-
+            $scope.listandoFlag=true;
+            $scope.pecaLista=[];
+            PecaApi.listar().success(function(pecas){
+                $scope.pecaLista=pecas;
+                $scope.listandoFlag=false;
+            });
             $scope.mostrarOuEsconderForm=function(){
                 $scope.mostrarFormFlag=!$scope.mostrarFormFlag;
             }
@@ -49,22 +57,11 @@
                                 <th>Quantidade</th>
                             </tr>
                         </thread>
-                        {% for pecas in peca_lista %}
-                            <tr>
-                                <td><a href="{{ pecas.edit_path }}" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a></td>
-                                <td>{{ pecas.id }}</td>
-                                <td>{{ pecas.title }}</td>
-                                <td>{{ pecas.price }}</td>
-                                <td>{{ pecas.amount }}</td>
-                                <td>
-                                    <form action="{{ pecas.delete_path }}" method="post">
-                                        {{ csrf_input() }}
-                                        <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                        <tbody>
+                            <tr pecalinha ng-repeat="p in pecaLista" pecas="p"></tr>
+                        </tbody>
                     </table>
+                    <img src="/static/img/ajax.gif" ng-show="listandoFlag" />
 
                 </div>
             </div>

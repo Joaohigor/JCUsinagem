@@ -16,6 +16,7 @@
                    setTimeout(function(){
                        peca.id=1;
                        obj.fncSucesso(pecas)
+                       $rootScope.$digest();
                    },1000);
 
                    return obj;

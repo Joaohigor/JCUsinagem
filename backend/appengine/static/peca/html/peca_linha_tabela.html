@@ -1,0 +1,13 @@
+<tr>
+    <td><a href="{{ pecas.edit_path }}" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></a></td>
+    <td>{{ pecas.id }}</td>
+    <td>{{ pecas.title }}</td>
+    <td>{{ pecas.price }}</td>
+    <td>{{ pecas.amount }}</td>
+    <td>
+        <form action="{{ pecas.delete_path }}" method="post">
+            {{ csrf_input() }}
+            <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+        </form>
+    </td>
+</tr>

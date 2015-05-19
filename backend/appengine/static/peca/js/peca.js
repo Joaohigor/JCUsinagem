@@ -35,3 +35,17 @@ pecaModulo.directive('pecaform',function(){
 
     };
 });
+pecaModulo.directive('pecalinha',function(){
+    return{
+        restrict: 'A',
+        replace:true,
+        templateUrl:'/static/peca/html/peca_linha_tabela.html',
+        scope: {
+            pecas: '='
+        },
+        controller:function($scope, PecasApi){
+
+        }
+
+    };
+});
