@@ -14,6 +14,8 @@ from gaegraph.model import Arc
 from gaepermission.decorator import login_required
 from gaepermission.decorator import login_not_required
 from routes.rests import rest
+import json
+
 
 @no_csrf
 def index(_logged_user):
@@ -31,9 +33,10 @@ def index(_logged_user):
     for pecas in peca_lista:
         pecas['edit_path']='%s/%s'%(editar_form_path,pecas['id'])
         pecas['delete_path']='%s/%s'%(delete_path,pecas['id'])
-    contexto={'peca_lista': peca_lista,
+    contexto={'peca_lista': json.dumps(peca_lista),
               'form_path':router.to_path(form),
-              'rest_new_path':router.to_path(rest.new)}
+              'rest_new_path':router.to_path(rest.new),
+              'rest_list_path':router.to_path(rest.index)}
     return TemplateResponse(contexto)
 
 @login_required

@@ -5,30 +5,33 @@
 {#    <script type="text/javascript" src="/static/peca/js/pecas_api_mock.js">#}
     <script type="text/javascript">
 
-        var rest=angular.module('rest',[]);
-        rest.factory('PecasApi',function($http){
-           return{
-               salvar: function(pecas){
-                   return $http.post('{{ rest_new_path }}',pecas);
-               },
-               listar: function(){
-                   return $http.post('{{ rest_list_path }}');
-               }
-           };
-        });
+{#        var rest = angular.module('rest', []);#}
+{#        rest.factory('PecasApi',function($http){#}
+{#           return{#}
+{#               salvar: function(pecas){#}
+{#                   return $http.post('{{ rest_new_path }}',pecas);#}
+{#               },#}
+{#               listar: function(){#}
+{#                   return $http.post('{{ rest_list_path }}', {});#}
+{#               }#}
+{#           };#}
+{#        });#}
 
 
 
-        var pecaApp=angular.module('pecaApp',['pecaModulo'],'rest');
-        function PecaController($scope,PecaApi){
+        var pecaApp = angular.module('pecaApp',['pecaModulo']);
+
+        function PecaController($scope){
             $scope.pecas={title:'Teste',price:'1,00',amount:'20'};
             $scope.mostrarFormFlag=false;
-            $scope.listandoFlag=true;
-            $scope.pecaLista=[];
-            PecaApi.listar().success(function(pecas){
-                $scope.pecaLista=pecas;
-                $scope.listandoFlag=false;
-            });
+            $scope.pecalista={{ peca_lista|safe or [] }};
+            $scope.listandoFlag=false;
+            $scope.postLista = "{{ rest_list_path }}";
+            $scope.postNew = "{{ rest_new_path }}";
+{#            PecasApi.listar().success(function(pecas){#}
+{#                $scope.pecalista = pecas;#}
+{#                $scope.listandoFlag=false;#}
+{#            });#}
             $scope.mostrarOuEsconderForm=function(){
                 $scope.mostrarFormFlag=!$scope.mostrarFormFlag;
             }
@@ -47,7 +50,7 @@
                 <button class="btn btn-success" ng-click="mostrarOuEsconderForm()"> Nova Peça </button>
                 <br/>
                 <br/>
-                <pecaform ng-show="mostrarFormFlag" pecas="pecas" title-label="Titulo" price-label="Preço" amount-label="Quantidade"></pecaform>
+                <pecaform ng-show="mostrarFormFlag" pecas="pecalista" title-label="Titulo" price-label="Preço" amount-label="Quantidade" post-new="postNew"></pecaform>
                     <table class="table">
                         <thread>
                             <tr>
@@ -58,7 +61,7 @@
                             </tr>
                         </thread>
                         <tbody>
-                            <tr pecalinha ng-repeat="p in pecaLista" pecas="p"></tr>
+                            <tr pecalinha ng-repeat="p in pecalista" pecas="p"></tr>
                         </tbody>
                     </table>
                     <img src="/static/img/ajax.gif" ng-show="listandoFlag" />
