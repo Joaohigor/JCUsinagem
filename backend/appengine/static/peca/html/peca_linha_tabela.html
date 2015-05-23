@@ -1,10 +1,10 @@
 <tr>
     <td><button class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button></td>
-    <td>{{ pecas.id }}</td>
-    <td>{{ pecas.title }}</td>
-    <td>{{ pecas.price }}</td>
-    <td>{{ pecas.amount }}</td>
+    <td>{{ peca.id }}</td>
+    <td>{{ peca.title }}</td>
+    <td>{{ peca.price }}</td>
+    <td>{{ peca.amount }}</td>
     <td>
-            <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+        <button class="btn btn-danger" ng-click="deletar(pecas)"><i class="glyphicon glyphicon-trash"></i></button>
     </td>
 </tr>

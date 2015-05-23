@@ -29,10 +29,10 @@ def index(_logged_user):
     peca_form = PecaFormTable()
     peca_lista=[peca_form.fill_with_model(pecas) for pecas in peca_lista]
     editar_form_path=router.to_path(editar_form)
-    delete_path=router.to_path(delete)
+    delete_path=router.to_path(rest.delete)
     for pecas in peca_lista:
         pecas['edit_path']='%s/%s'%(editar_form_path,pecas['id'])
-        pecas['delete_path']='%s/%s'%(delete_path,pecas['id'])
+        pecas['rest_delete_path']='%s/%s'%(delete_path,pecas['id'])
     contexto={'peca_lista': json.dumps(peca_lista),
               'form_path':router.to_path(form),
               'rest_new_path':router.to_path(rest.new),

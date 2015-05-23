@@ -11,8 +11,12 @@ from tekton.gae.middleware.redirect import RedirectResponse
 
 @no_csrf
 def index():
-    context = {'rest_list_path': router.to_path(rest.index),
-               'rest_new_path': router.to_path(rest.new)}
+    context = { 'rest_new_path': router.to_path(rest.new),
+                'rest_list_path': router.to_path(rest.index),
+                'rest_delete_path': router.to_path(rest.delete),
+                'rest_edit_path': router.to_path(rest.edit),
+
+               }
     return TemplateResponse(context, 'rests/rest_home.html')
 
 

@@ -1,64 +1,75 @@
-var pecaModulo=angular.module('pecaModulo',[]);
-
-pecaModulo.directive('pecaform',function(){
-    return{
+var pecaModule = angular.module('pecaModule',['rest']);
+pecaModule.directive('pecaform',function(){
+    return {
         restrict: 'E',
-        replace:true,
-        templateUrl:'/static/peca/html/peca_form.html',
-        scope: {
-            pecas: '=',
-            titleLabel: '@',
-            priceLabel: '@',
-            amountLabel: '@',
-            postNew: '='
+        replace: true,
+        templateUrl: '/static/peca/html/peca_form.html',
+        scope:{
+            peca:'=',
+            saveComplete:'&'
         },
-        controller:function($scope, $http){
+        controller:function($scope, PecaApi){
             $scope.salvandoFlag=false;
-            $scope.peca ={title: "Teste", price: "10", amount: "10"};
-            $scope.salvar=function(peca){
+            $scope.salvar=function(){
                 $scope.salvandoFlag=true;
                 $scope.errors={};
-                $http.post($scope.postNew, peca).success(function(pecas) {
-                    console.log(pecas);
-                    $scope.peca.title = '';
-                    $scope.peca.price = '';
-                    $scope.peca.amount = '';
-                    $scope.salvandoFlag = false;
-                    $scope.pecas.push(pecas);
-                }).error(function (errors) {
+                var promessa = PecaApi.salvar($scope.peca);
+                promessa.success(function(peca){
+                    $scope.salvandoFlag=false;
+                    $scope.peca.title = "";
+                    $scope.peca.price = "";
+                    $scope.peca.amount = "";
+                    if($scope.saveComplete != undefined) {
+                        $scope.saveComplete({'peca':peca});
+                    }
+                })
+                promessa.error(function (errors) {
                     $scope.errors = errors;
-                    console.log(errors);
-                    $scope.salvandoFlag = false;
+                    $scope.salvandoFlag=false;
 
                 });
-                //var promessa = PecasApi.salvar($scope.pecas);
-                //promessa.success(function(pecas) {
-                //        console.log(pecas);
-                //        $scope.pecas.title = '';
-                //        $scope.pecas.price = '';
-                //        $scope.pecas.amount = '';
-                //        $scope.salvandoFlag = false;
-                //    })
-                //promessa.error(function (errors) {
-                //        $scope.errors = errors;
-                //        console.log(errors);
-                //        $scope.salvandoFlag = false;
-                //
-                //    });
+
             }
         }
-
     };
 });
-pecaModulo.directive('pecalinha',function(){
-    return{
-        replace:true,
-        templateUrl:'/static/peca/html/peca_linha_tabela.html',
-        scope: {
-            pecas: '='
-        },
-        controller:function($scope){
 
+pecaModule.directive('peca_linha_tabela',function(){
+    return {
+        restrict: 'A',
+        replace: true,
+        templateUrl: '/static/peca/html/peca_linha_tabela.html',
+        scope:{
+            peca: '=',
+            deleteComplete: '&'
+        },
+        controller:function($scope, PecaApi){
+            $scope.ajaxFlag=false;
+            $scope.editandoFlag=false;
+            $scope.pecaEdicao={}
+            $scope.deletar=function(){
+                PecaApi.deletar($scope.peca.id).success(function(){
+                    $scope.ajaxFlag=true;
+                    $scope.deleteComplete({'peca':$scope.peca});
+                });
+            };
+            $scope.editar=function(){
+                    $scope.editandoFlag=true;
+                    $scope.pecaEdicao.id=$scope.peca.id;
+                    $scope.pecaEdicao.title=$scope.peca.title;
+                    $scope.pecaEdicao.price=$scope.peca.price;
+                    $scope.pecaEdicao.amount$scope.peca.amount;
+            };
+            $scope.cancelar=function(){
+                $scope.editandoFlag=false;
+            };
+
+            $scope.completarEdicao=function(){
+                PecaApi.editar($scope.pecaEdicao).success(function(peca){
+                    $scope.peca=peca;
+                    $scope.editandoFlag=false;
+                });
+            }
         }
 
     };
