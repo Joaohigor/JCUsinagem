@@ -2,8 +2,8 @@
     <td><button class="btn btn-primary" ng-hide="ajaxFlag || editandoFlag"><i
             class="glyphicon glyphicon-pencil" ng-click="editar()" ></i></button></td>
     <img src="/static/img/ajax.gif" ng-show="ajaxFlag"/>
-    <td><span ng_hide="editandoFlag">{{ peca.id }}</span> <input ng-show ="editandoFlag" type="text" ng-model="pecaEdicao.id"></td>
-    <td>{{ peca.title }}</td>
+    <td>{{ peca.id }}</td>
+    <td><span ng-hide="editandoFlag">{{ peca.title }}</span><input ng-show ="editandoFlag" type="text" ng-model="pecaEdicao.title"></td>
     <td>{{ peca.price }}</td>
     <td>{{ peca.amount }}</td>
     <td>
