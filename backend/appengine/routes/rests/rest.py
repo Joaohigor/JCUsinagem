@@ -51,11 +51,12 @@ def edit(_resp,id, **peca_properties):
     except CommandExecutionException:
         _resp.status_code = 500
         return JsonResponse(cmd.errors)
-    return _save_or_update_json_response(cmd)
+    return _save_or_update_json_response(peca)
 
 
 def delete(_resp, id):
     cmd = pecas_facade.delete_peca_cmd(id)
+    print('blabl')
 
     try:
         cmd()
