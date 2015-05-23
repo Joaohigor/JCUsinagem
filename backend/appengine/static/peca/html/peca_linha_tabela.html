@@ -1,12 +1,15 @@
 <tr>
-    <td><button ng-click="editar()" class="btn btn-primary" ng-hide="ajaxFlag || editandoFlag"><i class="glyphicon glyphicon-pencil"></i></button></td>
+    <td><button class="btn btn-primary" ng-hide="ajaxFlag || editandoFlag"><i
+            class="glyphicon glyphicon-pencil" ng-click="editar()" ></i></button></td>
     <img src="/static/img/ajax.gif" ng-show="ajaxFlag"/>
-    <td>{{ peca.id }}</td>
+    <td><span ng_hide="editandoFlag">{{ peca.id }}</span> <input ng-show ="editandoFlag" type="text" ng-model="pecaEdicao.id"></td>
     <td>{{ peca.title }}</td>
     <td>{{ peca.price }}</td>
     <td>{{ peca.amount }}</td>
     <td>
-        <button class="btn btn-danger" ng-hide="ajaxFlag" ng-click="deletar()"><i class="glyphicon glyphicon-trash"></i></button>
+        <button class="btn btn-danger" ng-hide="ajaxFlag"><i
+                class="glyphicon glyphicon-trash"
+                ng-click="deletar()"></i></button>
         <img src="/static/img/ajax.gif" ng-show="ajaxFlag"/>
     </td>
 </tr>
