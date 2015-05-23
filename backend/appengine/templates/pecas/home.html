@@ -16,7 +16,7 @@
                     return $http.post('{{ rest_list_path }}');
                 },
                 deletar:function(id) {
-                    return $http.post('{{ rest_delete_path }}', {id: id});
+                    return $http.post('{{ rest_delete_path }}', {id:id});
                 },
                 editar:function(peca){
                     return $http.post('{{ rest_edit_path }}',{id:peca.id,title:peca.title,
@@ -90,7 +90,7 @@
                             </tr>
                         </thread>
                         <tbody>
-                            <tr peca_linha_tabela ng-repeat="p in pecalista" peca="p" delete-complete="removerPeca(peca)"></tr>
+                            <tr pecalinha ng-repeat="p in pecalista" peca="p" delete-complete="removerPeca(peca)"></tr>
                         </tbody>
                     </table>
                     <img src="/static/img/ajax.gif" ng-show="listandoFlag" />

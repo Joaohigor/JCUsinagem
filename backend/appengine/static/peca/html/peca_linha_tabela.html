@@ -1,10 +1,12 @@
 <tr>
-    <td><button class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button></td>
+    <td><button ng-click="editar()" class="btn btn-primary" ng-hide="ajaxFlag || editandoFlag"><i class="glyphicon glyphicon-pencil"></i></button></td>
+    <img src="/static/img/ajax.gif" ng-show="ajaxFlag"/>
     <td>{{ peca.id }}</td>
     <td>{{ peca.title }}</td>
     <td>{{ peca.price }}</td>
     <td>{{ peca.amount }}</td>
     <td>
-        <button class="btn btn-danger" ng-click="deletar(pecas)"><i class="glyphicon glyphicon-trash"></i></button>
+        <button class="btn btn-danger" ng-hide="ajaxFlag" ng-click="deletar()"><i class="glyphicon glyphicon-trash"></i></button>
+        <img src="/static/img/ajax.gif" ng-show="ajaxFlag"/>
     </td>
 </tr>

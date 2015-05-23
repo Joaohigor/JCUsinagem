@@ -34,7 +34,7 @@ pecaModule.directive('pecaform',function(){
     };
 });
 
-pecaModule.directive('peca_linha_tabela',function(){
+pecaModule.directive('pecalinha',function(){
     return {
         restrict: 'A',
         replace: true,
@@ -58,7 +58,7 @@ pecaModule.directive('peca_linha_tabela',function(){
                     $scope.pecaEdicao.id=$scope.peca.id;
                     $scope.pecaEdicao.title=$scope.peca.title;
                     $scope.pecaEdicao.price=$scope.peca.price;
-                    $scope.pecaEdicao.amount$scope.peca.amount;
+                    $scope.pecaEdicao.amount=$scope.peca.amount;
             };
             $scope.cancelar=function(){
                 $scope.editandoFlag=false;
