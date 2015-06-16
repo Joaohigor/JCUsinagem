@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from gaegraph.business_base import NodeSearch, DeleteNode
+from gaebusiness.gaeutil import SaveCommand, UpdateCommand
+from gaegraph.business_base import NodeSearch, DeleteNode, DestinationsSearch, CreateArc, DeleteArcs
 from pecas_app.pecas_commands import ListPecaCommand, SavePecaCommand, UpdatePecaCommand, PecaForm,\
     GetPecaCommand, DeletePecaCommand
+from pecas_app.pecas_model import PecasArco
 
 
 def save_peca_cmd(**peca_properties):
@@ -23,7 +25,7 @@ def update_peca_cmd(peca_id, **peca_properties):
     return UpdatePecaCommand(peca_id, **peca_properties)
 
 
-def list_pecas_cmd():
+def list_pecas_cmd(peca):
     """
     Command to list Peca entities ordered by their creation dates
     :return: a Command proceed the db operations when executed
@@ -57,4 +59,3 @@ def delete_peca_cmd(peca_id):
     :return: Command
     """
     return DeletePecaCommand(peca_id)
-

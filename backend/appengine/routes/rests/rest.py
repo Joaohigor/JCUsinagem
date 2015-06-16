@@ -3,10 +3,12 @@ from __future__ import absolute_import, unicode_literals
 from google.appengine.ext import ndb
 from gaebusiness.business import CommandExecutionException
 from gaecookie.decorator import no_csrf
+from gaepermission.decorator import permissions, login_required
 from pecas_app.pecas_model import PecasArco
 from tekton.gae.middleware.json_middleware import JsonResponse
 from pecas_app import pecas_facade, pecas_facade
 from tekton import router
+
 
 @no_csrf
 def index(_logged_user):

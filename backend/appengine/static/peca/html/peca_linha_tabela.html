@@ -8,9 +8,9 @@
 
     <img src="/static/img/ajax.gif" ng-show="ajaxFlag"/>
     <td><{{ peca.id }}</td>
-    <td><span ng-hide="editandoFlag">{{ peca.title }}</span> <input ng-show="editandoFlag" type="text" ng-model="pecaEdicao.title"></td>
-    <td><span ng-hide="editandoFlag">{{ peca.price }}</span> <input ng-show="editandoFlag" type="text" ng-model="pecaEdicao.price"></td>
-    <td><span ng-hide="editandoFlag">{{ peca.amount }}</span> <input ng-show="editandoFlag" type="text" ng-model="pecaEdicao.amount"></td>
+    <td><span ng-hide="editandoFlag">{{ peca.title }}</span> <input class="form-control" ng-show="editandoFlag" type="text" ng-model="pecaEdicao.title"></td>
+    <td><span ng-hide="editandoFlag">{{ peca.price }}</span> <input class="form-control" ng-show="editandoFlag" type="text" ng-model="pecaEdicao.price"></td>
+    <td><span ng-hide="editandoFlag">{{ peca.amount }}</span> <input class="form-control" ng-show="editandoFlag" type="text" ng-model="pecaEdicao.amount"></td>
 
     <td>
         <button ng-click="deletar()" class="btn btn-danger" ng-hide="ajaxFlag"><i

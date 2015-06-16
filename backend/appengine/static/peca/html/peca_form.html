@@ -1,19 +1,19 @@
 <div class="well">
     <h1 class="text-center">Formulário de Peças</h1>
     <div class="form-group" ng-class="{'has-error':errors.title}">
-        <label for="titleInput" class="control-label">{{ titleLabel }}</label>
+        <label for="titleInput" class="control-label">Titulo</label>
         <input id="titleInput" type="text" class="form-control" ng-model="peca.title">
         <span class="help-block" ng-show="errors.title">{{ errors.title }}</span>
     </div>
 
     <div class="form-group" ng-class="{'has-error':errors.price}">
-        <label for="priceInput" class="control-label">{{ priceLabel }}</label>
+        <label for="priceInput" class="control-label"> Preço</label>
         <input id="priceInput" type="text" class="form-control" ng-model="peca.price">
         <span class="help-block" ng-show="errors.price">{{ errors.price }}</span>
     </div>
 
     <div class="form-group" ng-class="{'has-error':errors.amount}">
-        <label for="amountInput" class="control-label">{{ amountLabel }}</label>
+        <label for="amountInput" class="control-label"> Quantidade</label>
         <input id="amountInput" type="text" class="form-control" ng-model="peca.amount">
         <span class="help-block" ng-show="errors.amount">{{ errors.amount }}</span>
     </div>
